@@ -27,12 +27,16 @@ describe('myepicproject', () => {
     console.log('👀 Product Count', account.totalProducts.toString())
 
     // Update product count
-    await program.rpc.addProduct({
+    await program.rpc.addProduct("https://media4.giphy.com/media/4JZB66hwV8xMOKKrKr/giphy.gif", {
       accounts: {
         baseAccount: baseAccount.publicKey,
+        user: provider.wallet.publicKey
       },
     });
     account = await program.account.baseAccount.fetch(baseAccount.publicKey);
     console.log('👀 Product Count', account.totalProducts.toString())
+
+    // Access product_list on the account!
+    console.log('👀 Product List', account.productList);
   });
 });
